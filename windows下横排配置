@@ -1,0 +1,7 @@
+编辑weasel.custom.ymal文件，加入以下内容
+
+
+patch:
+  "style/color_scheme": cool_breeze
+  "style/horizontal": true
+  "style/inline_preedit": true
