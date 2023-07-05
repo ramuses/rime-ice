@@ -2,6 +2,6 @@
 
 
 patch:
-  "style/color_scheme": cool_breeze
+  #"style/color_scheme": cool_breeze
   "style/horizontal": true
   "style/inline_preedit": true
