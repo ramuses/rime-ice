@@ -44,13 +44,12 @@ var onlyOne = map[string]string{
 	"私钥":  "si yao",
 	"甲壳":  "jia ke",
 	"掉色":  "diao se",
-	"变色":  "bian se",
-	"上色":  "shang se",
 	"怎么着": "zen me zhe",
 	"这么着": "zhe me zhe",
 	"那么着": "na me zhe",
 	// 其他多音字，指定唯一读音
 	"的":   "de",
+	"了":   "le",
 	"核儿":  "he er",
 	"核":   "he",
 	"褪下":  "tui xia",
@@ -84,6 +83,7 @@ var onlyOne = map[string]string{
 	"绿":   "lv",
 	"圈里":  "quan li",
 	"圈外":  "quan wai",
+	"咱家":  "zan jia",
 	"圈":   "quan",
 	"伯":   "bo",
 	"胖":   "pang",
@@ -234,6 +234,8 @@ var onlyOne = map[string]string{
 	"绰":   "chuo",
 	"葚":   "shen",
 	"嘞":   "lei",
+	"凹":   "ao",
+	"给":   "gei",
 }
 
 func init() {
