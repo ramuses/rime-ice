@@ -6,9 +6,11 @@
 
 <br>
 
-[RIME(Rime Input Method Engine) / 中州韵输入法引擎](https://rime.im/) 是一个跨平台的输入法算法框架。
+[Rime Input Method Engine / 中州韵输入法引擎](https://rime.im/) 是一个跨平台的输入法算法框架。
 
-这里是 Rime 的一份配置仓库。雾凇拼音提供了一套开箱即用的完整配置，包含了输入方案（全拼、双拼）、长期维护的词库及各项扩展功能。用户需要下载平台对应的前端，并将此配置放到配置目录。
+这里是 Rime 的一份配置仓库，用户需要下载各平台对应的前端，并将此配置应用到配置目录。
+
+雾凇拼音提供了一套开箱即用的完整配置，包含输入方案（全拼、常见双拼）、长期维护的开源词库及各项扩展功能。
 
 详细介绍：[Rime 配置：雾凇拼音](https://dvel.me/posts/rime-ice/)
 
@@ -22,31 +24,40 @@
 
 - 简体 | 全拼 | 双拼
 - 主要功能
-    -   [melt_eng](https://github.com/tumuyan/rime-melt) 英文输入
+    -   轻量的英文输入，支持中英混输
     -   [优化英文输入体验](https://dvel.me/posts/make-rime-en-better/)
-    -   [两分输入法](http://cheonhyeong.com/Simplified/download.html) 拼字
+    -   拆字反查（<kbd>uU</kbd>+拼音），拆字辅码（拼音+<kbd>`</kbd>+拆字辅码）
     -   自整理的 Emoji
-    -   [以词定字](https://github.com/BlindingDark/rime-lua-select-character)
-    -   [长词优先](https://github.com/tumuyan/rime-melt/blob/master/lua/melt.lua)
-    -   [Unicode](https://github.com/shewer/librime-lua-script/blob/main/lua/component/unicode.lua)
-    -   [数字、人民币大写](https://wb98.gitee.io/)
-    -   日期、时间、星期
+    -   以词定字（左右中括号：<kbd>[</kbd>、<kbd>]</kbd>）
+    -   长词优先
+    -   Unicode（<kbd>U</kbd>+Unicode 码位）
+    -   数字、人民币大写（<kbd>R</kbd>+数字）
+    -   日期、时间、星期（详见方案 `/date_translator` 节点）
+    -   农历（转写：<kbd>N</kbd>+八位数字；获取当前农历：全拼<kbd>nl</kbd>，双拼<kbd>lunar</kbd>）
     -   常见错音错字提示
-    -   所有标点符号直接上屏，/ 模式改为 v 模式，/ 直接上屏
-    -   增加了许多拼音纠错
+    -   置顶候选项（详见方案 `/pin_cand_filter` 节点）
+    -   所有标点符号直接上屏
+    -   特殊符号、字符输入（全拼<kbd>v</kbd>+首字母缩写；双拼<kbd>V</kbd>+首字母缩写）
+    -   拼音纠错（模糊音）
+    -   更多默认未启用的功能请参考 `rime.lua` 文件以及方案注释
 - 简体字表、词库
-    -   [《通用规范汉字表》](https://github.com/iDvel/The-Table-of-General-Standard-Chinese-Characters)
-    -   [华宇野风系统词库](http://bbs.pinyin.thunisoft.com/forum.php?mod=viewthread&tid=30049)
-    -   [清华大学开源词库](https://github.com/thunlp/THUOCL)
-    -   [《现代汉语常用词表》](https://gist.github.com/indiejoseph/eae09c673460aa0b56db)
-    -   [《现代汉语词典》](https://forum.freemdict.com/t/topic/12102)
-    -   [《同义词词林》](https://forum.freemdict.com/t/topic/1211)
-    -   [《新华成语大词典》](https://forum.freemdict.com/t/topic/11407)
-    -   [腾讯词向量](https://ai.tencent.com/ailab/nlp/en/download.html)
+    -   [通用规范汉字表](https://github.com/iDvel/The-Table-of-General-Standard-Chinese-Characters)（by 中华人民共和国教育部）8K 常用汉字
+    -   [Unihan 字库](https://www.unicode.org/Public/)（by Unicode lnc | [UNICODE LICENSE V3](https://www.unicode.org/license.txt)）40K 大字库， **默认未启用**
+    -   [现代汉语常用词表](https://zh.wikipedia.org/wiki/%E7%8E%B0%E4%BB%A3%E6%B1%89%E8%AF%AD%E5%B8%B8%E7%94%A8%E8%AF%8D%E8%A1%A8)（by 中国国家语言文字工作委员会）
+    -   [华宇野风词库](http://bbs.pinyin.thunisoft.com/forum.php?mod=viewthread&tid=30049)（by 野风）
+    -   [简化字八股文](https://github.com/rime/rime-essay-simp)（by rime | [LGPL](https://github.com/rime/rime-essay-simp/blob/master/LICENSE)）
+    -   [清华大学开源词库](https://github.com/thunlp/THUOCL)（by THUNLP | [MIT](https://github.com/thunlp/THUOCL/blob/master/LICENSE)）
+    -   [腾讯词向量](https://ai.tencent.com/ailab/nlp/en/download.html)（@Huandeep [整理](https://github.com/iDvel/rime-ice/issues/24) | by Tencent AI Lab | [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/)）
 - 词库修订
     - 校对大量异形词、错别字、错误注音
     - 全词库完成注音
     - 同义多音字注音
+    - 参考
+      -   《现代汉语词典》
+      -   《同义词词林》
+      -   《新华成语大词典》
+      -   [校对标准论坛](http://www.jiaodui.com/bbs/)
+- Rime、Squirrel、Weasel 常用配置项的详尽注释
 
 <br>
 
@@ -64,7 +75,7 @@
 
 维护内容主要是异形词、错别字的校对，错误注音的修正，缺失的常用词汇的增添，词频的调整。
 
-欢迎在词库方面提 issue，我会及时更新修正。
+欢迎在词库方面提 issue [#666](https://github.com/iDvel/rime-ice/issues/666) ，我会及时更新修正。
 
 <br>
 
@@ -78,42 +89,67 @@
 
 ### 手动安装
 
-将仓库所有文件复制粘贴到配置目录，重新部署。
+您可以将仓库打包下载，或者整体 clone 后，将所有文件复制粘贴到配置目录，重新部署。
 
 更新词库，手动覆盖 `cn_dicts` `en_dcits` `opencc` 三个文件夹。
 
+您也可以前往 [Release](https://github.com/iDvel/rime-ice/releases) 界面，下载特定版本的词典文件（具体描述见 Release 说明），覆盖配置目录的对应文件。
+
 ### 东风破 [plum](https://github.com/rime/plum)
 
-所有配方（`others/recipes/*.recipe.yaml`）只是简单地更新覆盖文件，适合更新词库时使用。后四个配方只是更新词库文件，并不更新 `rime_ice.dict.yaml` 和 `melt_eng.dict.yaml`，因为用户可能会挂载其他词库。如果更新后部署时报错，可能是增、删、改了文件名，需要检查上面两个文件和词库的对应关系。
+选择配方（`others/recipes/*.recipe.yaml`）来进行安装或更新。
 
-安装或更新：全部文件
+词库配方只是更新具体词库文件，并不更新 `rime_ice.dict.yaml` 和 `melt_eng.dict.yaml`，因为用户可能会挂载其他词库。如果更新后部署时报错，可能是增、删、改了文件名，需要检查上面两个文件和词库的对应关系。
+
+℞ 安装或更新全部文件
 
 ```
 bash rime-install iDvel/rime-ice:others/recipes/full
 ```
 
-安装或更新：所有词库文件（包含下面三个）
+℞ 安装或更新所有词库文件（包含下面三个）
 
 ```
 bash rime-install iDvel/rime-ice:others/recipes/all_dicts
 ```
 
-安装或更新：拼音词库文件
+℞ 安装或更新拼音词库文件（ `cn_dicts/` 目录内所有文件）
 
 ```
 bash rime-install iDvel/rime-ice:others/recipes/cn_dicts
 ```
 
-安装或更新：英文词库文件
+℞ 安装或更新英文词库文件（ `en_dicts/` 目录内所有文件）
 
 ```
 bash rime-install iDvel/rime-ice:others/recipes/en_dicts
 ```
 
-安装或更新：opencc(emoji)
+℞ 安装或更新 opencc （ `opencc/` 目录内所有文件）
 
 ```
 bash rime-install iDvel/rime-ice:others/recipes/opencc
+```
+
+下面这个配方会在 `radical_pinyin.custom.yaml` 和 `melt_eng.custom.yaml` 里将 `speller/algebra` 修改为对应的双拼拼写，选择一个自己使用的双拼作为参数。
+
+℞ 双拼补丁
+
+```
+bash rime-install iDvel/rime-ice:others/recipes/config:schema=flypy
+bash rime-install iDvel/rime-ice:others/recipes/config:schema=double_pinyin
+bash rime-install iDvel/rime-ice:others/recipes/config:schema=mspy
+bash rime-install iDvel/rime-ice:others/recipes/config:schema=sogou
+bash rime-install iDvel/rime-ice:others/recipes/config:schema=abc
+bash rime-install iDvel/rime-ice:others/recipes/config:schema=ziguang
+```
+
+℞ 下载特定版本的配置
+
+在仓库后加 `@tag` 即可，例如：
+
+```sh
+bash rime-install iDvel/rime-ice@2024.05.21:others/recipes/full
 ```
 
 ### 仓输入法 [Hamster](https://github.com/imfuxiao/Hamster)
@@ -158,9 +194,10 @@ patch:
   # 以下根据自己所需自行定义，仅做参考。
   # 针对对应处方的定制条目，请使用 <recipe>.custom.yaml 中配置，例如 rime_ice.custom.yaml
   __patch:
-    key_binder/+:
-      select_first_character: "bracketleft" # 即 [
-      select_last_character: "bracketright" # 即 ]
+    key_binder/bindings/+:
+      # 开启逗号句号翻页
+      - { when: paging, accept: comma, send: Page_Up }
+      - { when: has_menu, accept: period, send: Page_Down }
 ```
 
 </details>
@@ -169,7 +206,16 @@ patch:
 
 ## 感谢 ❤️
 
-感谢上述提到的词库、方案及功能参考。
+特别感谢上文已经提及的词库、词典的作者、贡献者及整理者；特别感谢以及下列词库、方案、脚本的作者及贡献者（提及的均为 GitHub id）：
+
+- @mozillazg 开发的汉字转拼音工具和数据库（MIT）
+- [melt_eng](https://github.com/tumuyan/rime-melt)（@tumuyan | [Apache 2.0](https://github.com/tumuyan/rime-melt/blob/master/LICENSE)） ：提供了部分（约 1000 条）英文词汇以及原始英文方案参考；
+- [部件拆字方案 v1](https://github.com/mirtlecn/rime-radical-pinyin)（@mirtlecn | [CC BY-SA 4.0](https://github.com/mirtlecn/rime-radical-pinyin/blob/master/LICENSE)）：提供的拆字反查，辅码插件；
+- [长词优先插件](https://github.com/tumuyan/rime-melt/blob/master/lua/melt.lua)（@tumuyan | [Apache 2.0](https://github.com/tumuyan/rime-melt/blob/master/LICENSE)）
+- [Unicode 插件](https://github.com/shewer/librime-lua-script/blob/main/lua/component/unicode.lua)（@shewer | [MIT](https://github.com/shewer/librime-lua-script/blob/main/lua/component/unicode.lua)）
+- [数字、人民币大写插件](https://github.com/yanhuacuo/98wubi/blob/master/lua/number.lua)（@98wubi）
+- [农历插件](https://github.com/boomker/rime-fast-xhup)（@boomker | [LGPL 3.0](https://github.com/boomker/rime-fast-xhup/blob/master/LICENSE)）
+- 未能在此处详述的、在本库源码注释中提及的项目及作者给予的帮助和参考
 
 感谢 [@Huandeep](https://github.com/Huandeep) 整理的多个词库。
 
@@ -177,13 +223,7 @@ patch:
 
 感谢所有贡献者。
 
-搜狗转 Rime：[lewangdev/scel2txt](https://github.com/lewangdev/scel2txt)
-
-大量参考：
-
-- [校对标准论坛](http://www.jiaodui.com/bbs/)
-- [汉典](https://www.zdic.net/)
-- [成语典](https://dict.idioms.moe.edu.tw/)
+<!-- 搜狗转 Rime：[lewangdev/scel2txt](https://github.com/lewangdev/scel2txt) -->
 
 Thanks to JetBrains for the OSS development license.
 

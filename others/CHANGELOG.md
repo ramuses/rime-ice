@@ -1,10 +1,70 @@
 # 更新日志
 
-除日常更新词库外的一些主要更新 🆕 及破坏性变更 ⚠️。
+除日常更新词库外的一些主要更新 🆕、破坏性变更 ⚠️。
 
+## 2024-09-25
 
+- `number_translator.lua`：⚙️ 依会计凭证书写要求，修正万亿的金额大写格式
+- radical_pinyin: 🆕 拆字词典更新至 v2，包含更多汉字
 
-## 2023-11-29
+## 2024-08-29
+- `cold_word_drop`：🆕 支持 iOS (#1003)
+
+## 2024-08-18
+
+- ci: 词典处理脚本可在 GitHub CI 中运行，提交信息以 ` [build]` 结尾或者手动执行时触发。
+
+## 2024-07-27
+
+- `number_translator.lua`: 🆕 转换时，将「拾万」和「壹拾万」作为两个独立的候选。
+- `en_spacer.lua`：⚠️ 现在不会在中英标点、空字符前添加空格。将在英文后添加空格，修改为在英文前添加空格。
+
+## 2024-05-15
+
+- `select_character.lua`: 🆕 当候选字数为 1 时，快捷键使其上屏（为旧版行为）；
+- `search.lua`：
+    - 重写，使其在 librime 1.85 也能正常工作；
+    - 开启辅码方案的用户字典时（非默认行为，您也不应该这么做），不再造成用户词典锁定
+- `corrector.lua`：
+    - ⚠️ 使用 translator 中的 comment_format 标记拼音串，以适配 librime 1.11；
+    - 🆕 `translator/keep_comments: true`：可以保留拼音注释
+
+## 2024-02-09 ♻️
+
+重构了 `pin_cand_filter.lua` 置顶候选项功能。 [#675](https://github.com/iDvel/rime-ice/issues/675)
+
+- 调整了方案中 `engine/filters` 的排序
+- 不再需要在配置中写 emoji，emoji 可自动吸附。
+
+## 2024-02-04 ⚠️
+
+⚠️ 中英混输词库由英文方案附属切换到单独的 table_translator ([#662](https://github.com/iDvel/rime-ice/pull/662))
+
+- 词库文件由 `cn_en*.dict.yaml` 变为 `cn_en*.txt`
+- 双拼不再需要去 `melt_eng.dict.yaml` 更改引用词库
+
+## 2024-02-01 🆕
+
+`pin_cand_filter.lua` 置顶候选项 [#586](https://github.com/iDvel/rime-ice/issues/586)
+
+## 2024-01-29 🆕 ⚠️
+
+[部件拆字方案](https://github.com/mirtlecn/rime-radical-pinyin) 反查、辅码 ([#643](https://github.com/iDvel/rime-ice/pull/643))
+
+- 反查：默认以 `uU` 开头
+- 辅码：默认以 `` ` ``（反引号）开启查询
+
+⚠️ 部件拆字方案替换掉了两分方案
+
+## 2024-01-02 🆕 🐛 ⚠️
+
+🆕 农历功能 [#565](https://github.com/iDvel/rime-ice/issues/565)
+
+🐛 长词优先 `long_word_filter.lua` 不提升包含英文、数字、emoji、假名的候选项 [#592](https://github.com/iDvel/rime-ice/issues/592)
+
+⚠️ 更新并修改 `weasel_style.yaml` 为 `weasel.yaml` （[#584](https://github.com/iDvel/rime-ice/pull/584)）
+
+## 2023-11-29 ⚠️
 
 九宫格方案 2~9 的映射由 ADGJMPTW 改为 23456789 [a0e0ef8](https://github.com/iDvel/rime-ice/commit/a0e0ef807e4ebc50771563717375f554c9473315)
 
@@ -61,9 +121,9 @@
 - 增加 Lua 脚本 `autocap_filter.lua`
 - 修改了 `melt_eng.schema.yaml` 拼写派生规则。
 
-## 2023-06-15 🐛
+## 2023-05-24 🐛
 
-修复全拼方案模糊音派生规则
+修复全拼方案模糊音派生规则 [6c0618a](https://github.com/iDvel/rime-ice/commit/6c0618aeaf2910482e20ff1c057f482aaa98c051)
 
 ## 2023-05-13 🆕
 

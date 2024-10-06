@@ -28,7 +28,7 @@ var (
 )
 
 // 初始化特殊词汇列表、需要注音列表、错别字列表、拼音列表
-func init() {
+func initCheck() {
 	// 特殊词汇列表，不进行任何检查
 	specialWords.Add("狄尔斯–阿尔德反应")
 	specialWords.Add("特里斯坦–达库尼亚")
@@ -102,7 +102,7 @@ func init() {
 		text, code := parts[0], parts[1]
 		hanPinyin[text] = append(hanPinyin[text], code)
 	}
-	// 给 hanPinyin 补充不再字表的读音，和过滤列表 hanPinyinFilter
+	// 给 hanPinyin 补充不在字表的读音，和过滤列表 hanPinyinFilter
 	file4, err := os.Open(汉字拼音映射TXT)
 	if err != nil {
 		log.Fatalln(err)
@@ -159,20 +159,21 @@ func Check(dictPath string, _type int) {
 			continue
 		}
 		wg.Add(1)
-		go checkLine(dictPath, _type, line, lineNumber, &wg)
+		go func(line string, lineNumber int) {
+			defer wg.Done()
+			checkLine(dictPath, _type, line, lineNumber)
+		}(line, lineNumber)
 	}
+
+	wg.Wait()
 
 	if err := sc.Err(); err != nil {
 		log.Fatalln(err)
 	}
-
-	wg.Wait()
 }
 
 // 检查一行
-func checkLine(dictPath string, _type int, line string, lineNumber int, wg *sync.WaitGroup) {
-	defer wg.Done()
-
+func checkLine(dictPath string, _type int, line string, lineNumber int) {
 	// 忽略注释，base 中有很多被注释了的词汇，暂时没有删除
 	if strings.HasPrefix(line, "#") {
 		// 注释以 '#' 开头，但不是以 '# '开头（强迫症晚期）
@@ -275,9 +276,11 @@ func checkLine(dictPath string, _type int, line string, lineNumber int, wg *sync
 
 	// 需要注音但没有注音的字
 	if dictPath == TencentPath {
-		for _, word := range polyphoneWords.ToSlice() {
-			if strings.Contains(text, word) {
-				fmt.Println("❌ 需要注音：", line)
+		if !strings.Contains(text, "什么") { // 不处理「什么」
+			for _, word := range polyphoneWords.ToSlice() {
+				if strings.Contains(text, word) {
+					fmt.Println("❌ 需要注音：", line)
+				}
 			}
 		}
 	}
